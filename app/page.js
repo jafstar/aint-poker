@@ -85,9 +85,13 @@ export default function AintPoker() {
             <div className="showdown">
               <div className="round-label">Showdown</div>
               {hand.results.map((r, i) => (
-                <div className="decision" key={i}>{r.name}: {r.hand.join(' ')} — {r.handName}</div>
+                <div className="decision" key={i}>{r.name}: {r.hand.join(' ')} — {r.handDesc || r.handName}</div>
               ))}
-              <div className="winner">🏆 {hand.winner} wins the hand!</div>
+              {hand.isSplitPot ? (
+                <div className="winner">🏆 Split pot — {hand.winners.map(w => w.name).join(' & ')} tie with {hand.winners[0].handDesc || hand.winners[0].handName}!</div>
+              ) : (
+                <div className="winner">🏆 {hand.winners[0].name} wins the hand with {hand.winners[0].handDesc || hand.winners[0].handName}!</div>
+              )}
             </div>
           )}
         </div>
