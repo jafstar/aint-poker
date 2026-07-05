@@ -2,15 +2,19 @@
 import { useState } from 'react';
 import { PLAYERS } from '../lib/game';
 
-// Player table positions — reused directly from the original _player.css
-// layout (percentage/vw based, oval arrangement), same six seats.
+// Player table positions — six seats around the oval. Fixed to use % instead
+// of the original vw/vh units: vw/vh always compute against the full
+// viewport no matter which element they're applied to, so even though these
+// players are correctly nested inside #table, the old units ignored that
+// container entirely and positioned relative to the whole browser window —
+// which is why Cali ended up off the table and Penny/Lilly went missing.
 const SEAT_STYLE = [
-  { top: '70px', left: '30px' },
-  { top: '6vh', left: '30vw' },
-  { top: '6vh', left: '55vw' },
-  { top: '67px', left: '80vw' },
-  { top: '36vh', left: '10vw' },
-  { top: '36vh', left: '78vw' },
+  { top: '8%', left: '4%' },
+  { top: '8%', left: '38%' },
+  { top: '8%', left: '72%' },
+  { top: '55%', left: '72%' },
+  { top: '55%', left: '38%' },
+  { top: '55%', left: '4%' },
 ];
 
 export default function AintPoker() {
